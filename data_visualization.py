@@ -4,18 +4,18 @@ import numpy as np
 
 # === Paramètres de la caméra (à ajuster si tu les connais) ===
 # D: [-1.2477725744247437, 0.8747861981391907, -9.421713184565306e-05, -0.00014916047803126276, -0.2381284087896347, -1.2307056188583374, 0.8520383238792419, -0.2296648770570755]
-# K: [306.000244140625, 0.0, 318.4753112792969, 0.0, 306.1123352050781, 201.36949157714844, 0.0, 0.0, 1.0]
+K= np.array([[306.000244140625, 0.0, 318.4753112792969],[ 0.0, 306.1123352050781, 201.36949157714844],[ 0.0, 0.0, 1.0]])
 # R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
 # P: [306.000244140625, 0.0, 318.4753112792969, 0.0, 0.0, 306.1123352050781, 201.36949157714844, 0.0, 0.0, 0.0, 1.0, 0.0]
 # binning_x: 0
-focal_length = 306
-principal_point = (318.5, 201.4)  # ex: centre de l'image
-K = np.array([[focal_length, 0, principal_point[0]],
-              [0, focal_length, principal_point[1]],
-              [0, 0, 1]])
+# focal_length = 306
+# principal_point = (318, 201)  # ex: centre de l'image
+# K = np.array([[focal_length, 0, principal_point[0]],
+#               [0, focal_length, principal_point[1]],
+#               [0, 0, 1]])
 
 # === Chemin vers dossier d'images ===
-image_folder = "raw/test/camera_color_image_raw"
+image_folder = "sync_color_image"
 
 # Lister et trier les images
 image_files = sorted([
