@@ -1,7 +1,7 @@
 addict==2.4.0
 asttokens==3.0.0
 attrs==25.4.0
-bagpy==0.5
+bagpy
 bitarray==3.7.2
 bitstring==4.3.1
 blinker==1.9.0
