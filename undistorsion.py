@@ -18,7 +18,7 @@ K= np.array([[306.000244140625, 0.0, 318.4753112792969],[ 0.0, 306.1123352050781
 
 # === Chemin vers dossier d'images ===
 image_folder = "raw/test/camera_color_image_raw"
-output_folder = "undistorted_dataset"
+
 
 # Lister et trier les images
 image_files = sorted([
