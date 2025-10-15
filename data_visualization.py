@@ -19,6 +19,12 @@ image_files = sorted([
     if f.lower().endswith(('.png', '.jpg', '.jpeg'))
 ])
 
+def get_transformation_matrix(R, t):
+    T = np.eye(4)
+    T[:3, :3] = R
+    T[:3, 3] = t.ravel()  # Assure que t est un vecteur de forme (3,)
+    return T
+
 def get_matched_points(img1, img2):
     gray1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
     gray2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
@@ -47,6 +53,7 @@ def get_matched_points(img1, img2):
 
 # === Calcul des poses entre images ===
 Rarray = []
+tarray = []
 Tarray = []
 
 for i in range(len(image_files) - 1):
@@ -65,7 +72,9 @@ for i in range(len(image_files) - 1):
 
     _, R, t, _ = cv2.recoverPose(E, pts1, pts2, K)
     Rarray.append(R)
-    Tarray.append(t)
+    tarray.append(t)
+    T=get_transformation_matrix(R,t)
+    Tarray.append(T)
 
 # === Reconstruction de la trajectoire et direction ===
 positions = [np.array([0, 0, 0])]
@@ -73,7 +82,7 @@ directions = [np.array([0, 0, 1])]  # Direction initiale = Z camera
 
 pose = np.eye(4)
 
-for R, t in zip(Rarray, Tarray):
+for R, t in zip(Rarray, tarray):
     T_mat = np.eye(4)
     T_mat[:3, :3] = R
     T_mat[:3, 3] = t.ravel()
