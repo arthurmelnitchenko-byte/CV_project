@@ -3,17 +3,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-# === Paramètres de la caméra (à ajuster si tu les connais) ===
-# D: [-1.2477725744247437, 0.8747861981391907, -9.421713184565306e-05, -0.00014916047803126276, -0.2381284087896347, -1.2307056188583374, 0.8520383238792419, -0.2296648770570755]
+# === Paramètres de la caméra ===
 K= np.array([[306.000244140625, 0.0, 318.4753112792969],[ 0.0, 306.1123352050781, 201.36949157714844],[ 0.0, 0.0, 1.0]])
-# R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
-# P: [306.000244140625, 0.0, 318.4753112792969, 0.0, 0.0, 306.1123352050781, 201.36949157714844, 0.0, 0.0, 0.0, 1.0, 0.0]
-# binning_x: 0
-# focal_length = 306
-# principal_point = (318, 201)  # ex: centre de l'image
-# K = np.array([[focal_length, 0, principal_point[0]],
-#               [0, focal_length, principal_point[1]],
-#               [0, 0, 1]])
 
 # === Chemin vers dossier d'images ===
 image_folder = "raw/test/camera_color_image_raw"
@@ -23,12 +14,6 @@ image_files = sorted([
     f for f in os.listdir(image_folder)
     if f.lower().endswith(('.png', '.jpg', '.jpeg'))
 ])
-
-import cv2
-import numpy as np
-import cv2
-import numpy as np
-
 
 def get_matched_points(img1, img2):
     # Convertir les images en niveaux de gris
@@ -71,10 +56,10 @@ def get_matched_points(img1, img2):
 
     return pts1, pts2
 
-
 # Boucle sur les paires d'images
 Rarray=[]
 Tarray=[]
+
 for i in range(len(image_files) - 1):
     img1 = cv2.imread(os.path.join(image_folder, image_files[i]))
     img2 = cv2.imread(os.path.join(image_folder, image_files[i + 1]))
@@ -102,10 +87,6 @@ for i in range(len(image_files) - 1):
     #     break
     Rarray.append(R)
     Tarray.append(t)
-
-print("Rotation (R):\n array size:\n", Rarray[0], len(Rarray))
-print("Translation (T):\n ", Tarray[0])
-
 
 positions = [np.array([0, 0, 0])]  # position initiale
 
